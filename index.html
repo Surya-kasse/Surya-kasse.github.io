@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suryachandra Kasse - Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(30, 42, 56, 0.95);
+      color: white;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem 2rem;
+    }
+    .navbar h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 25px;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    nav ul li a:hover, nav ul li a.active {
+      background: #1abc9c;
+      color: #fff;
+      transform: scale(1.08);
+    }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      background: linear-gradient(120deg, #1abc9c 0%, #34495e 100%);
+      color: #fff;
+      text-align: center;
+      padding: 4rem 1rem 2rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .profile-pic-hero {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #1abc9c;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      margin: 0 auto 1.5rem auto;
+      display: block;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      color: #e0eafc;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+    }
+    .hero-btns a {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      background: #fff;
+      color: #1abc9c;
+      font-weight: 700;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .hero-btns a:hover {
+      background: #1abc9c;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .section-title {
+      font-size: 2rem;
+      color: #1abc9c;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(30,42,56,0.08);
+      padding: 2rem 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+      animation-delay: 0.2s;
+    }
+    .card i {
+      font-size: 2.2rem;
+      color: #1abc9c;
+      margin-bottom: 1rem;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(30,42,56,0.13);
+    }
+    .about-text {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem 1.2rem;
+      margin-top: 0.7rem;
+    }
+    .skills-list span {
+      background: #e0eafc;
+      color: #1abc9c;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .project-card {
+      background: #f8fafc;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(30,42,56,0.07);
+      padding: 1.5rem 1.2rem;
+      margin-bottom: 1.2rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+      animation-delay: 0.3s;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 24px rgba(30,42,56,0.13);
+      transform: translateY(-6px) scale(1.02);
+    }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #34495e;
+    }
+    .project-links a {
+      color: #1abc9c;
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 1.2rem;
+      transition: color 0.2s;
+    }
+    .project-links a:hover {
+      color: #149a82;
+      text-decoration: underline;
+    }
+    .contact-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(30,42,56,0.07);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin: 0 auto;
+      max-width: 400px;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+      animation-delay: 0.4s;
+    }
+    .contact-card a {
+      color: #1abc9c;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 0.5rem;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+    .contact-card a:hover {
+      color: #149a82;
+      text-decoration: underline;
+    }
+    .contact-icons {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+    }
+    .download-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.7rem 2rem;
+      background: #1abc9c;
+      color: #fff;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .download-btn:hover {
+      background: #149a82;
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      padding: 1.2rem 0;
+      background: #222c36;
+      color: #fff;
+      font-size: 1rem;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    @media (max-width: 900px) {
+      .navbar, main {
+        padding: 1rem;
+      }
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .hero {
+        padding: 2.5rem 0.5rem 1.5rem 0.5rem;
+      }
+      .card, .contact-card {
+        padding: 1.2rem 0.7rem;
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+<div class="navbar">
+<h1>Suryachandra Kasse</h1>
+<nav>
+<ul>
+<li><a class="active" href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#education">Education</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#goals">Goals</a></li>
+<li><a href="#learning">Learning</a></li>
+<li><a href="#resume">Resume</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<section class="hero">
+<div class="hero-content">
+<img alt="Suryachandra Kasse" class="profile-pic-hero" src="profile.jpg"/>
+<h2>Hi, I'm Suryachandra Kasse</h2>
+<p>Master's student in Computer Science | Full-Stack &amp; IT Automation Enthusiast<br/>Passionate about building scalable, cloud-based solutions.</p>
+<div class="hero-btns">
+<a href="#contact">Contact Me</a>
+</div>
+</div>
+</section>
+<main id="main-content">
+<div class="card-grid" id="about">
+<div class="card">
+<i class="fas fa-user-graduate"></i>
+<div class="section-title">About Me</div>
+<div class="about-text">I am a Master's student in Computer Science at the University of South Dakota with a background in Civil Engineering. My passion for automation and software development inspired me to transition into IT, and I now specialize in full-stack development, IT automation, and cloud technologies.</div>
+</div>
+</div>
+<div class="card-grid" id="skills">
+<div class="card">
+<i class="fas fa-code"></i>
+<div class="section-title">Skills</div>
+<div class="skills-list">
+<span>C#</span><span>JavaScript</span><span>SQL</span><span>Python</span><span>PowerShell</span><span>ASP.NET</span><span>HTML5</span><span>CSS3</span><span>PHP</span><span>Ext.js</span><span>MySQL</span><span>PostgreSQL</span><span>SQL Server</span><span>Azure</span><span>Docker</span><span>Kubernetes</span><span>ServiceNow</span><span>Visual Studio</span><span>Postman</span><span>Datadog</span><span>Moogsoft</span><span>Communication</span><span>Teamwork</span><span>Problem-Solving</span>
+</div>
+</div>
+</div>
+<div class="card-grid" id="projects">
+<!-- Education Section -->
+
+<!-- Experience Section -->
+
+<div class="card project-card">
+<i class="fas fa-robot"></i>
+<div class="project-title">Neuro IT Automation</div>
+<div>Automated incident management using PowerShell, ServiceNow, and MySQL.</div>
+</div>
+<div class="card project-card">
+<i class="fas fa-comments"></i>
+<div class="project-title">SDChat (Cognizant Automation Center)</div>
+<div>Built a chatbot with PHP, Ext.js, PostgreSQL for internal automation.</div>
+</div>
+<div class="card project-card">
+<i class="fas fa-ticket-alt"></i>
+<div class="project-title">Travel Ticket Management System</div>
+<div>A .NET-based system for handling employee travel requests using ASP.NET and SQL Server.</div>
+</div>
+</div>
+<div class="card-grid" id="education">
+<div class="card">
+<i class="fas fa-graduation-cap"></i>
+<div class="section-title">Education</div>
+<div class="about-text">
+<strong>Master of Science in Computer Science</strong><br/>
+      University of South Dakota, Vermillion, SD<br/>
+      Aug 2024 – May 2026 | GPA: 3.6/4.0<br/>
+<em>Relevant Coursework: Computer Vision, AI &amp; Machine Learning, Distributed Systems</em><br/><br/>
+<strong>Bachelor of Science in Civil Engineering</strong><br/>
+      Vel Tech Institute of Science &amp; Technology, Chennai<br/>
+      Jun 2018 – Jun 2022 | GPA: 8.25/10
+    </div>
+</div>
+</div>
+<div class="card-grid" id="experience">
+<div class="card">
+<i class="fas fa-briefcase"></i>
+<div class="section-title">Experience</div>
+<div class="about-text">
+<strong>Junior Software Engineer</strong><br/>
+      Cognizant Technology Solutions | Sept 2023 – Aug 2024<br/>
+      • Developed IT automation workflows using ServiceNow<br/>
+      • Leveraged MySQL for database operations<br/>
+      • Automated tasks using PowerShell &amp; Linux scripts<br/>
+      • Optimized query performance<br/><br/>
+<strong>Programmer Analyst Trainee</strong><br/>
+      Cognizant Technology Solutions | Sept 2022 – Sept 2023<br/>
+      • Built web apps using Ext.js, PHP, PostgreSQL<br/>
+      • Designed UI, managed APIs and servers<br/><br/>
+<strong>Intern</strong><br/>
+      Cognizant Technology Solutions | Mar 2022 – Aug 2022<br/>
+      • Hands-on .NET full-stack development<br/>
+      • Worked on debugging and version control
+    </div>
+</div>
+</div>
+<div class="card-grid" id="goals">
+<div class="card">
+<i class="fas fa-mountain"></i>
+<div class="section-title">Future Goals</div>
+<div class="about-text">
+          My career goal is to become a full-stack .NET developer and specialize in cloud-based IT automation and DevOps. I want to contribute to scalable and efficient enterprise systems.
+        </div>
+</div>
+</div>
+<div class="card-grid" id="learning">
+<div class="card">
+<i class="fas fa-lightbulb"></i>
+<div class="section-title">Learning Journey</div>
+<ul class="about-text">
+<li>Microsoft Certified: Azure Fundamentals</li>
+<li>Hands-on DevOps practice with Docker &amp; Kubernetes</li>
+<li>Worked on ITSM tools like ServiceNow and automation pipelines</li>
+</ul>
+</div>
+</div>
+<div class="card-grid" id="resume">
+<div class="card" style="align-items:center;">
+<i class="fas fa-file-download"></i>
+<div class="section-title">Download Resume</div>
+<p class="about-text">You can download my latest resume here:</p>
+<a class="download-btn" download="" href="Suryachandra_resume.pdf">Download Resume (PDF)</a>
+</div>
+</div>
+<div class="card-grid" id="contact">
+<div class="contact-card">
+<i class="fas fa-envelope"></i>
+<div class="section-title">Contact</div>
+<div class="about-text"><strong>Email:</strong> kassesuryachandra@gmail.com</div>
+<div class="about-text"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/suryachandra-kasse-a5165b1ab" target="_blank">linkedin.com/in/suryachandra-kasse</a></div>
+<div class="contact-icons">
+<a href="mailto:kassesuryachandra@gmail.com"><i class="fas fa-envelope"></i></a>
+<a href="https://www.linkedin.com/in/suryachandra-kasse-a5165b1ab" target="_blank"><i class="fab fa-linkedin"></i></a>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<p>© 2025 Suryachandra Kasse. All rights reserved.</p>
+</footer>
+<script>
+    const navLinks = document.querySelectorAll('.navbar nav ul li a');
+    const sectionIds = ['about', 'skills', 'projects', 'education', 'experience', 'goals', 'learning', 'resume', 'contact'];
+    const mainContent = document.getElementById('main-content');
+
+    function showSection(sectionId) {
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = (id === sectionId) ? 'grid' : 'none';
+      });
+    }
+
+    // Show About by default
+    document.addEventListener("DOMContentLoaded", function() {
+      showSection('about');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.hash && sectionIds.includes(this.hash.substring(1))) {
+          e.preventDefault();
+          // Remove active from all
+          navLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+          showSection(this.hash.substring(1));
+          // Scroll to hero
+          document.querySelector('.hero').scrollIntoView({behavior: 'smooth'});
+        }
+      });
+    });
+</script>
+</body>
+</html>
